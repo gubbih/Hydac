@@ -13,28 +13,104 @@ namespace Hydac
         {
             Console.Clear();
             Console.WriteLine("Choose an option:");
-            Console.WriteLine("1) Gæst");
+            Console.WriteLine("1) Gæste check-in");
             Console.WriteLine("2) Medarbejder Login: ");
             Console.WriteLine("3) Exit");
             Console.Write("\r\nSelect an option: ");
 
             switch (Console.ReadLine())
             {
-                case "1":
-                    //Gæst();
+                case "1": // Gæste check-in
+                    Gæst();
 
                     return true;
-                case "2":
+                case "2": //Medarbejder login
                     Mlogin();
 
                     return false;
-                case "3":
-                    return false;
+                case "3": //exit
+                    Mlogin();
+                    return true;
                 default:
                     return true;
             }
         }
-        public static bool Mlogin()
+        private static string Gæst()
+        {
+            Console.Clear();
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1) Gæste check-in");
+            Console.WriteLine("2) Gæste check-ud ");
+            Console.WriteLine("3) Tilbage");
+            switch (Console.ReadLine())
+            {
+                case "1": // Gæste check-in
+                    Gcheckin();
+
+                    return "true";
+                case "2": // Gæste check-ud
+                    //Gcheck();
+
+                    return "true";
+
+                default:
+                    Forside();
+                    return "true";
+            }
+            return "";
+        }
+        private static string Gcheckin()
+        {
+            Console.Clear();
+            bool BG_read;
+            DateTime localDate = DateTime.Now;
+            Console.WriteLine("Du er i gang med at checke dig ind på dette tidspunkt: " + localDate);
+            Console.WriteLine("Indtast dit navn:");
+            string Gnavn = Console.ReadLine();
+            Console.WriteLine("Har du læst reglerne?");
+            Console.WriteLine("ja/nej");
+            string G_read = Console.ReadLine();
+            if (G_read == "ja")
+            {
+                bool.TryParse(G_read, out BG_read);
+                BG_read = true;
+            }else if (G_read == "nej")
+            {
+                bool.TryParse(G_read, out BG_read);
+                BG_read = false;
+            }
+            else
+            {
+                Console.WriteLine("der skete en fejl, du kommer tilbage til forsiden");
+                Console.WriteLine("tryk på enter for at forsætte");
+                Console.ReadLine();
+                Forside();
+            }
+            Console.Clear();
+            Console.WriteLine("vælg en medarbejder");
+            Console.WriteLine("1. Torben");// Intet array endnu, men har klar gjort et array med en for
+            /*for (int i = 0; i < Person.length; i++)
+            {
+                int y = 0
+                y = i + 1;
+                Console.WriteLine(y + " " + Person[i]);
+            }*/
+
+            string medarbejder = Console.ReadLine();
+            /*for (int i = 0; i < Person.length; i++)
+            {
+                if (i == medarbejder)
+                {
+                    fidner ledsager navn og gemmer det hos gæstens datafil
+                }
+                
+            }*/
+            
+
+            return "";
+        }
+
+        private static bool Mlogin()
         {
             string Username;
             Console.Clear();
@@ -46,26 +122,31 @@ namespace Hydac
             if (Password != "")
             {
                 Console.Clear();
-                Console.WriteLine("Du er checked in, din ankomst tid er " + localDate);
-                Console.WriteLine();
+                //Console.WriteLine("Du er checked in, din ankomst tid er " + localDate); Bruger en methode til at checke ind nu
+                //Console.WriteLine();
                 Console.WriteLine("Choose an option:");
                 Console.WriteLine("1) Smiley");
                 Console.WriteLine("2) Updatere din info ");
                 Console.WriteLine("3) Book et møde ");
                 Console.WriteLine("4) Jeg går hjem ");
-                Console.WriteLine("5) Logud");
+                Console.WriteLine("5) Check in ");
+                Console.WriteLine("6) Logud");
                 switch (Console.ReadLine())
                 {
-                    case "1":
+                    case "1":// smiley
                         //ReverseString();
 
                         return true;
-                    case "2":
+                    case "2"://update
                         Mlogin();
                         return true;
-                    case "3":
+                    case "3"://book møde
                         return false;
-                    default:
+                    case "4"://Check ud
+                        return false;
+                    case "5":
+                        return false;
+                    default://logud
                         return true;
                 }
             }
