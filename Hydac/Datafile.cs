@@ -87,7 +87,7 @@ namespace Hydac
                         sr.Close();
                 }
             
-            medarbejder = new Medarbejder(a_medarbejder[0], string.Parse(a_medarbejder[1]), double.Parse(a_medarbejder[2]), bool.Parse(a_medarbejder[3]), int.Parse(a_medarbejder[4]));
+            medarbejder = new Medarbejder(a_medarbejder[0], a_medarbejder[1], int.Parse(a_medarbejder[2]), DateTime.Parse(a_medarbejder[3]), DateTime.Parse(a_medarbejder[4]), bool.Parse(a_medarbejder[5]));
             return medarbejder;
 
          }
