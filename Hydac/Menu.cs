@@ -57,9 +57,9 @@ namespace Hydac
                     Forside();
                     return "true";
             }
-            return "";
+            
         }
-        private static string Gcheckin()
+        private static string Gcheckin() // skal rykkes over i en anden class (for at det hele ser pænere ud og den er nemmere og finde)
         {
             Console.Clear();
             bool BG_read;
@@ -128,13 +128,13 @@ namespace Hydac
                 Console.WriteLine("1) Smiley");
                 Console.WriteLine("2) Updatere din info ");
                 Console.WriteLine("3) Book et møde ");
-                Console.WriteLine("4) Jeg går hjem ");
-                Console.WriteLine("5) Check in ");
+                Console.WriteLine("4) Check ind ");
+                Console.WriteLine("5) Check ud ");
                 Console.WriteLine("6) Logud");
                 switch (Console.ReadLine())
                 {
                     case "1":// smiley
-                        //ReverseString();
+                        //Smiley();
 
                         return true;
                     case "2"://update
@@ -142,11 +142,12 @@ namespace Hydac
                         return true;
                     case "3"://book møde
                         return false;
-                    case "4"://Check ud
+                    case "4"://Check ind
                         return false;
-                    case "5":
+                    case "5": // Cehck ud
                         return false;
                     default://logud
+                        Forside();
                         return true;
                 }
             }
