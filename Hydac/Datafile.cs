@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hydac
 {
-    class Medarbejder
+    public class Medarbejder
     {
         private string name;
         private string password;
@@ -48,63 +48,75 @@ namespace Hydac
             set { iBygning = value; }
             get { return iBygning; }
         }
-        public string MakeTitle()
+        public string StringSave()
         {
-            return $"{name};{password};{smiley};{checkIn};{checkUd}"; // data skal ændres
+            return $"{name};{password}"; // data skal ændres
 
         }
-        public Medarbejder(string name, string password,int smiley, DateTime checkIn, DateTime checkUd, bool iBygning)
-        {
+        public Medarbejder(string name, string password, int smiley, DateTime checkIn, DateTime checkUd, bool iBygning)
+        {// Bruges til hverdag når man møder ind
             Name = name;
             Password = password;
             Smiley = smiley;
             CheckIn = checkIn;
             CheckUd = checkUd;
             IBygning = iBygning;
-
-
         }
-        public Medarbejder[] LoadedMedarbejder;
+        public Medarbejder(string name, string password)// bruger kun de værdier vi skal bruge til at lave brugeren, resten kommer på når man møde ind på arbejde
+        {
+            Name = name;
+            Password = password;
+            
+        }
+        public Medarbejder[] LoadedMedarbejder;     
+
+        
+    }
+    public class DataHandler
+    {
+        private string dataFileName;
+        public string DataFileName
+        {
+            get { return dataFileName; }
+        }
+        public DataHandler(string dataFileName)
+        {
+            this.dataFileName = dataFileName;
+        }
+
+        public void SavePerson(Medarbejder medarbejder)
+        {
+            StreamWriter writer = new StreamWriter(dataFileName);
+            writer.WriteLine(medarbejder.StringSave());
+            writer.Close();
+        }
+
         public Medarbejder LoadMedarbejder()
         {
             Medarbejder medarbejder;
             string line;
             string[] a_medarbejder = new string[5];
             StreamReader sr = null;
-                try
-                {
-                    sr = new StreamReader("medarbejdere.txt");
-                    line = sr.ReadLine();
-                    a_medarbejder = line.Split(';');
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(" Exception: " + e.Message);
-                }
-                finally
-                {
-                    if (sr != null)
-                        sr.Close();
-                }
-            
+            try
+            {
+                sr = new StreamReader("medarbejdere.txt");
+                line = sr.ReadLine();
+                a_medarbejder = line.Split(';');
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(" Exception: " + e.Message);
+            }
+            finally
+            {
+                if (sr != null)
+                    sr.Close();
+            }
             medarbejder = new Medarbejder(a_medarbejder[0], a_medarbejder[1], int.Parse(a_medarbejder[2]), DateTime.Parse(a_medarbejder[3]), DateTime.Parse(a_medarbejder[4]), bool.Parse(a_medarbejder[5]));
             return medarbejder;
-
-         }
-        public void SaveMedarbejder(Medarbejder[] medarbejder)
-        {
-            StreamWriter sw = new StreamWriter("medarbejdere.txt");
-            for (int i = 0; i < medarbejder.Length; i++)
-            {
-                if (medarbejder[i] == null)
-                {
-                    break;
-                }
-                sw.WriteLine(medarbejder[i].MakeTitle());
-            }
-            sw.Close();
-            
         }
+
+        
     }
     class Dagslog
     {

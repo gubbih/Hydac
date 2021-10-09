@@ -4,13 +4,14 @@ using System.Text;
 
 namespace Hydac
 {
-    class Menu
+    public class Menu
     {
         public string Password;
         public string Username;
         public bool gæst = false;
         public static bool Forside()
         {
+            
             Console.Clear();
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1) Gæste check-in");
@@ -29,7 +30,7 @@ namespace Hydac
 
                     return false;
                 case "3": //exit
-                    Mlogin();
+                    Admin_Save();
                     return true;
                 default:
                     return true;
@@ -157,9 +158,19 @@ namespace Hydac
                 return false;
             }
 
-
-
-
+            //Person person = new Person("Anders Andersen", new DateTime(1975, 8, 24), 175.9, true, 3);
+        }
+        private static string Admin_Save()
+        {
+            DataHandler handler = new DataHandler("medarbejder.txt");
+            Console.WriteLine("name");
+            
+            string name = Console.ReadLine();
+            Console.WriteLine("password");
+            string password = Console.ReadLine();
+            Medarbejder person = new Medarbejder(name,password);
+            handler.SavePerson(person);
+            return "";
         }
     }
 

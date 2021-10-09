@@ -10,8 +10,8 @@ namespace Hydac
             bool showMenu = true;
             while (showMenu)
             {
+                showMenu = Menu.Forside();
             }
-            
         }
 
     }
